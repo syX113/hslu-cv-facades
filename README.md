@@ -1,12 +1,11 @@
 # HSLU: Computer Vision (Façade Segmentation Optimization)
 
-Table of contents:
-
 * [Introduction](#introduction)
 * [Research Questions](#research-questions)
 * [Underlying Data](#underlying-data)
 * [Proceeding & Methodologies](#proceeding---methodologies)
 * [Results](#results)
+* [Authors](#authors)
 
 ## Background 
 
@@ -52,7 +51,7 @@ Classes:
 - vegetation
 - window
 
-Additional datasets are not considered and used for testing/validation.  
+Additional datasets are not considered and used for testing/validation.
 
 ## Methodology
 
@@ -62,7 +61,7 @@ todo
 
 todo
 
-### Authors
+## Authors
 
 Lukas Zurbriggen & Tim Giger\
 *Hochschule Luzern, M.Sc. in Applied Information & Data Science*\
