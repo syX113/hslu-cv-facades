@@ -1,12 +1,11 @@
-# HSLU: Computer Vision (Facade Segmentation Optimization)
+# HSLU: Computer Vision (Façade Segmentation Optimization)
 
-- [HSLU: Computer Vision (Facade Segmentation Optimization)](#hslu--computer-vision--facade-segmentation-optimization-)
-  * [Introduction](#introduction)
-  * [Research Questions](#research-questions)
-  * [Underlying Data](#underlying-data)
-  * [Proceeding & Methodologies](#proceeding---methodologies)
-  * [Results](#results)
-    + [Authors](#authors)
+* [Introduction](#introduction)
+* [Research Questions](#research-questions)
+* [Underlying Data](#underlying-data)
+* [Proceeding & Methodologies](#proceeding---methodologies)
+* [Results](#results)
++ [Authors](#authors)
 
 ## Background 
 
@@ -33,7 +32,7 @@ This will involve optimizing both approaches through additional image preparatio
 The research questions are as follows:
 
 - *Which data preperation/augmentation steps have a positive effect on the Mean IoU for the building façade segmentation task on the specified dataset?*
-- *Which approach leads to a higher Mean IoU in the building façade segmentation task on the specified dataset?*
+- *Which approach leads to a higher Mean IoU in the building façade segmentation task on the specified dataset?*  
 
 ## Underlying Data
 
@@ -52,9 +51,17 @@ Classes:
 - vegetation
 - window
 
+
 ## Proceeding & Methodologies
+
+tbd\
 
 ## Results
 
+tbd\
 
 ### Authors
+
+Lukas Zurbriggen & Tim Giger \
+Hochschule Luzern, M.Sc. in Applied Information & Data Science\
+Module: Computer Vision
