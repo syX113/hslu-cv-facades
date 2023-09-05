@@ -18,7 +18,7 @@ However, infrared thermography has emerged as a promising technique for large-sc
 To conduct these large-scale assessments effectively, a critical preliminary step involves segmenting the building façade into different parts, e.g. window, balcony and other parts. 
 This segmentation allows for a more targeted approach when using thermal image analysis, focusing only on the effective areas of the building façade.
 
-## Introduction
+## Introduction 
 
 In initial, heuristic tests, two deep learning methods showed promising results for segmenting building facades:\
 - Mask R-CNN ([Detectron2 implementation from Meta/FAIR](https://ai.meta.com/tools/detectron2/))
@@ -28,14 +28,14 @@ In initial, heuristic tests, two deep learning methods showed promising results 
 The primary objective of this research project is to identify the most effective deep learning method.\
 This will involve optimizing both approaches through additional image preparation steps and then comparing and validating these methods using appropriate metrics and techniques.
 
-## Research Questions
+## Research Questions 
 
 The research questions are as follows:
 
 - *Which data preperation/augmentation steps have a positive effect on the Mean IoU for the building façade segmentation task on the specified dataset?*
-- *Which approach leads to a higher Mean IoU in the building façade segmentation task on the specified dataset?*  
+- *Which approach leads to a higher Mean IoU in the building façade segmentation task on the specified dataset?*\ 
 
-## Underlying Data
+## Underlying Data 
 
 The dataset is hosted on [Roboflow - Project: building-facade-segmentation-instance](https://universe.roboflow.com/building-facade/building-facade-segmentation-instance).\ 
 It contains 598 annotated images of building façades.\
@@ -54,11 +54,11 @@ Classes:
 
 Additional datasets are not considered and used for testing/validation.\ 
 
-## Proceeding & Methodologies
+## Proceeding & Methodologies 
 
 tbd\ 
 
-## Results
+## Results 
 
 tbd\ 
 
