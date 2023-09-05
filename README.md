@@ -38,7 +38,7 @@ The research questions are as follows:
 ## Underlying Data
 
 The dataset is hosted on [Roboflow - Project: building-facade-segmentation-instance](https://universe.roboflow.com/building-facade/building-facade-segmentation-instance).\
-It contains 598 annotated images of building façades.\
+It contains 598 annotated images of building façades.
 
 Classes:
 - balcony-fence
@@ -54,13 +54,13 @@ Classes:
 
 Additional datasets are not considered and used for testing/validation.  
 
-## Methodologies & Proceeding
+## Methodology
 
-to do  
+todo
 
-## Results 
+## Results
 
-to do  
+todo
 
 ### Authors
 
