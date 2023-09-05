@@ -1,4 +1,4 @@
-# HSLU: Computer Vision (Façade Segmentation Optimization)
+# Computer Vision (Façade Segmentation Optimization)
 
 * [Introduction](#introduction)
 * [Research Questions](#research-questions)
@@ -53,8 +53,7 @@ Classes:
 
 Additional datasets are not considered and used for testing/validation.
 
-
-## Methodology
+## Methodology
 
 todo
 
