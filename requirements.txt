@@ -9,6 +9,7 @@ click                   8.1.7
 cloudpickle             2.2.1
 cmake                   3.25.0
 contourpy               1.1.0
+comet-ml                3.33.10
 cycler                  0.11.0
 detectron2              0.6+cu113
 filelock                3.9.0
