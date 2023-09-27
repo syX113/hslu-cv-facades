@@ -1,1 +1,4 @@
 .comet.config
+mask-r-cnn/comet_api_key.txt
+output/evaluation/instances_predictions.pth
+output/model_final.pth
