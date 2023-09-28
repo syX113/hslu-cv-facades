@@ -4,3 +4,10 @@ output/evaluation/instances_predictions.pth
 output/model_final.pth
 mask-r-cnn/__pycache__
 mask-r-cnn/temp_link
+YOLOv8/.comet.config
+YOLOv8/yolov8x-seg.pt
+yolov8x-seg.pt
+.comet.config
+yolov8n.pt
+*/*/*/*/*.pt
+YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_base
