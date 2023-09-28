@@ -57,7 +57,7 @@ def setup(output_directory):
     # Define model configuration
     # Reference CFG parameters: https://detectron2.readthedocs.io/en/latest/modules/config.html#yaml-config-references
     cfg = get_cfg()
-    cfg.MODEL.DEVICE = "cuda:3" # Set GPU or CPU devices
+    cfg.MODEL.DEVICE = "cuda" # Set GPU or CPU devices, e.g. "cuda:3" to use specific GPU
     cfg.OUTPUT_DIR = output_directory
     cfg.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/mask_rcnn_X_101_32x8d_FPN_3x.yaml"))
     cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-InstanceSegmentation/mask_rcnn_X_101_32x8d_FPN_3x.yaml")
@@ -132,4 +132,5 @@ def main():
 
 if __name__ == "__main__":
     
+    # Execute training loop
     main()

@@ -2,3 +2,5 @@
 mask-r-cnn/comet_api_key.txt
 output/evaluation/instances_predictions.pth
 output/model_final.pth
+mask-r-cnn/__pycache__
+mask-r-cnn/temp_link
