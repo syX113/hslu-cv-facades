@@ -5,3 +5,5 @@ yolov8x-seg.pt
 yolov8n.pt
 */*/*/*/*.pt
 YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_base
+YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_augmented
+nohup.out

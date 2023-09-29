@@ -6,9 +6,7 @@ import os
 import torch
 import gc
 
-def clean_mem():
-    torch.cuda.empty_cache()
-    gc.collect()
+
 
 # run program in back:
 # nohup /home/ubuntu/miniconda3/envs/venv-yolov8/bin/python /home/ubuntu/hslu-computer-vision/hslu-cv-facades/YOLOv8/train_yolov8.py &
@@ -20,17 +18,29 @@ def clean_mem():
 
 # set up comet ml logging 
 comet_ml.init(project_name='hslu-computer-vision')
-#experiment = comet_ml.Experiment()
-# Set the name of the experiment
-#experiment.set_name(name='yolov8_base')
 
+
+def clean_mem():
+    torch.cuda.empty_cache()
+    gc.collect()
+    
+    
+#def get_model_variant(): 
+#    allowed_answers = ["base", "augmented"]
+#    while True:
+#        model_variant = input("Which model do you want to train/val/predict?: Please enter 'base' or 'augmented': ")
+#    
+#        if model_variant.lower() in allowed_answers:
+#            return model_variant
+#        
+#        print("Invalid input. Please enter 'base' or 'augmented': ")
+        
 
 
 def do_train():
     torch.cuda.empty_cache() 
     # Create new YOLO model
     model = YOLO('yolov8x-seg.pt')
-
     # Train the model (adjust data.yaml with paths)
     model.train(data='./YOLOv8/building-facade-segmentation-instance-1/data.yaml', 
                 epochs=1000, 
@@ -41,15 +51,15 @@ def do_train():
                 save_period=100, 
                 workers=4,
                 val=True,
+                augment=True,
                 project='YOLOv8',
-                name='./building-facade-segmentation-instance-1/runs/YOLOv8_base/train')
+                name=f'./building-facade-segmentation-instance-1/runs/YOLOv8_augmented/train')
 
 def do_validation():
-    
-    model = YOLO('./YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_base/train/weights/best.pt')  # load model
+    model = YOLO(f'./YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_{model_variant}/train/weights/best.pt')  # load model
     results = model.val(split='val',
                         project='YOLOv8',
-                        name='./building-facade-segmentation-instance-1/runs/YOLOv8_base/val') # evaluate model performance on the validation set
+                        name=f'./building-facade-segmentation-instance-1/runs/YOLOv8_{model_variant}/val') # evaluate model performance on the validation set
                           
     results.box.map    # map50-95
     results.box.map50  # map50
@@ -59,7 +69,7 @@ def do_validation():
     
 def do_prediction():
     
-    model = YOLO('./YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_base/train/weights/best.pt')  # load model
+    model = YOLO(f'./YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_{model_variant}/train/weights/best.pt')  # load model
     
     # Define the folder with pictures to apply predictions
     model.predict('/home/ubuntu/data/unzipped/facade-original-yolo-segmentation/test/images', 
@@ -68,12 +78,12 @@ def do_prediction():
                   conf=0.1, 
                   device=['CPU'], #use CPU because else CUDA out of memory for all the 83 predicitions
                   project='YOLOv8',
-                  name='./building-facade-segmentation-instance-1/runs/YOLOv8_base/predict')
+                  name=f'./building-facade-segmentation-instance-1/runs/YOLOv8_{model_variant}/predict')
     
 
     
 
 
 if __name__ == '__main__':
-    do_prediction()
+    do_train()
     
