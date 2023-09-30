@@ -70,8 +70,7 @@ class CometDefaultTrainer(DefaultTrainer):
             model (torch.nn.Module): Model Object
         """
         evaluators = [
-            self.build_evaluator(cfg, name, output_folder=os.path.join(cfg.OUTPUT_DIR, "evaluation"))
-            for name in cfg.DATASETS.TEST
+            self.build_evaluator(cfg=cfg, dataset_name=cfg.DATASETS.TEST, output_folder=output_folder=os.path.join(cfg.OUTPUT_DIR, "evaluation"))
         ]
         res = self.test(cfg, model, evaluators)
         res = OrderedDict({k: v for k, v in res.items()})
