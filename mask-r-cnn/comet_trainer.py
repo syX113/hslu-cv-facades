@@ -56,10 +56,12 @@ class CometDefaultTrainer(DefaultTrainer):
 
         self._trainer._write_metrics = self._write_metrics
 
+    @classmethod
     def build_evaluator(cls, cfg, dataset_name, output_folder=None):
         if output_folder is None:
             os.makedirs(f"{cfg.OUTPUT_DIR}/eval/", exist_ok=True)
             output_folder = f"{cfg.OUTPUT_DIR}/eval/"
+        print(f"Dataset Name in build_evaluator method: {dataset_name}")
         return COCOEvaluator(dataset_name, cfg, False, output_folder)
 
     def evaluate_metrics(self, cfg, model):
@@ -70,7 +72,7 @@ class CometDefaultTrainer(DefaultTrainer):
             model (torch.nn.Module): Model Object
         """
         evaluators = [
-            self.build_evaluator(cfg=cfg, dataset_name=cfg.DATASETS.TEST, output_folder=output_folder=os.path.join(cfg.OUTPUT_DIR, "evaluation"))
+            self.build_evaluator(cfg=cfg, dataset_name=cfg.DATASETS.TEST[0], output_folder=os.path.join(cfg.OUTPUT_DIR, "evaluation"))
         ]
         res = self.test(cfg, model, evaluators)
         res = OrderedDict({k: v for k, v in res.items()})

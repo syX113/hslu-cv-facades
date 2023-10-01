@@ -88,7 +88,7 @@ def setup(output_directory):
     cfg.DATALOADER.NUM_WORKERS = 8
     cfg.SOLVER.IMS_PER_BATCH = 4
     cfg.SOLVER.BASE_LR = 0.0025
-    cfg.SOLVER.MAX_ITER = 50
+    cfg.SOLVER.MAX_ITER = 3000
     cfg.SOLVER.STEPS = [] # Learning rate decay
     cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 256
     cfg.MODEL.ROI_HEADS.NUM_CLASSES = 10 + 1  # Number of classes + background
@@ -158,7 +158,7 @@ def main():
     cfg.MODEL.WEIGHTS = os.path.join(cfg.OUTPUT_DIR, "model_final.pth")
     cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7  # Custom testing threshold
     predictor = DefaultPredictor(cfg)
-    log_predictions(predictor, get_facade_dicts(f"{ROOT_DIR}valid/"), experiment)
+    log_predictions(predictor, experiment, 'facade_test_city')
 
 if __name__ == "__main__":
     

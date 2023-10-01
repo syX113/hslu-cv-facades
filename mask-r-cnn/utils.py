@@ -25,8 +25,8 @@ def format_predictions(outputs, annotations):
     for annotation in annotations:
         bbox = annotation["bbox"]
 
-        # Convert from numpy.int64 to int
-        x, y, x2, y2 = map(lambda x: x.item(), bbox)
+        # Convert from numpy.int64 to int, if needed
+        x, y, x2, y2 = map(lambda x: x.item() if hasattr(x, 'item') else x, bbox)
 
         label = annotation["category_id"]
         data.append(
@@ -50,6 +50,7 @@ def format_predictions(outputs, annotations):
         )
 
     return data
+
 
 def compute_repeat_factors(dataset_name):
     data_dicts = DatasetCatalog.get(dataset_name)
