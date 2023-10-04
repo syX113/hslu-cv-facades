@@ -5,6 +5,9 @@ from roboflow import Roboflow
 import os
 import torch
 import gc
+from ray import tune
+import matplotlib.pyplot as plt
+
 
 
 
@@ -25,24 +28,30 @@ def clean_mem():
     gc.collect()
     
     
-#def get_model_variant(): 
-#    allowed_answers = ["base", "augmented"]
-#    while True:
-#        model_variant = input("Which model do you want to train/val/predict?: Please enter 'base' or 'augmented': ")
-#    
-#        if model_variant.lower() in allowed_answers:
-#            return model_variant
-#        
-#        print("Invalid input. Please enter 'base' or 'augmented': ")
-        
 
-
-def do_train():
+def do_train_base():
     torch.cuda.empty_cache() 
     # Create new YOLO model
-    model = YOLO('yolov8x-seg.pt')
+    model = YOLO('yolov8x-seg.pt') #yolov8x-seg
     # Train the model (adjust data.yaml with paths)
-    model.train(data='./YOLOv8/building-facade-segmentation-instance-1/data.yaml', 
+    model.train(data='./YOLOv8/building-facade-segmentation-instance-1/config.yaml', 
+                epochs=1000, 
+                imgsz=1024, 
+                batch=8, # AutoBatch?
+                plots=True, 
+                device=[0,1,2,3], #change cores beeing used  
+                save_period=100, 
+                workers=4,
+                val=True,
+                project='YOLOv8',
+                name='./building-facade-segmentation-instance-1/runs/YOLOv8_base/train')
+    
+def do_train_augmented():
+    torch.cuda.empty_cache() 
+    # Create new YOLO model
+    model = YOLO('yolov8x-seg.pt') #yolov8x-seg
+    # Train the model (adjust data.yaml with paths)
+    model.train(data='./YOLOv8/building-facade-segmentation-instance-1/config.yaml', 
                 epochs=1000, 
                 imgsz=1024, 
                 batch=8, # AutoBatch?
@@ -53,13 +62,52 @@ def do_train():
                 val=True,
                 augment=True,
                 project='YOLOv8',
-                name=f'./building-facade-segmentation-instance-1/runs/YOLOv8_augmented/train')
+                name='./building-facade-segmentation-instance-1/runs/YOLOv8_augmented/train')
+    
+def do_train_nano():
+    torch.cuda.empty_cache() 
+    # Create new YOLO model
+    model = YOLO('yolov8n-seg.pt') #yolov8x-seg
+    # Train the model (adjust data.yaml with paths)
+    model.train(data='./YOLOv8/building-facade-segmentation-instance-1/config.yaml', 
+                epochs=1000, 
+                imgsz=1024, 
+                batch=8, # AutoBatch?
+                plots=True, 
+                device=[0,1,2,3], #change cores beeing used  
+                save_period=100, 
+                workers=4,
+                val=True,
+                augment=True,
+                project='YOLOv8',
+                name='./building-facade-segmentation-instance-1/runs/YOLOv8_nano/train')
+    
+    
+def do_train_yolov8_lr():
+    torch.cuda.empty_cache() 
+    # Create new YOLO model
+    model = YOLO('yolov8x-seg.pt') #yolov8x-seg
+    # Train the model (adjust data.yaml with paths)
+    model.train(data='./YOLOv8/building-facade-segmentation-instance-1/config.yaml', 
+                epochs=1000, 
+                imgsz=1024, 
+                batch=8, # AutoBatch?
+                plots=True, 
+                device=[0,1,2,3], #change cores beeing used  
+                save_period=100, 
+                workers=4,
+                val=True,
+                augment=True,
+                lr0 = 0.1,
+                lrf = 0.00001,
+                project='YOLOv8',
+                name='./building-facade-segmentation-instance-1/runs/YOLOv8_lr/train')
 
 def do_validation():
-    model = YOLO(f'./YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_{model_variant}/train/weights/best.pt')  # load model
+    model = YOLO('./YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_augmented/train/weights/best.pt')  # load model
     results = model.val(split='val',
                         project='YOLOv8',
-                        name=f'./building-facade-segmentation-instance-1/runs/YOLOv8_{model_variant}/val') # evaluate model performance on the validation set
+                        name=f'./building-facade-segmentation-instance-1/runs/YOLOv8_augmented/val') # evaluate model performance on the validation set
                           
     results.box.map    # map50-95
     results.box.map50  # map50
@@ -69,7 +117,7 @@ def do_validation():
     
 def do_prediction():
     
-    model = YOLO(f'./YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_{model_variant}/train/weights/best.pt')  # load model
+    model = YOLO('./YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_augmented/train/weights/best.pt')  # load model
     
     # Define the folder with pictures to apply predictions
     model.predict('/home/ubuntu/data/unzipped/facade-original-yolo-segmentation/test/images', 
@@ -78,12 +126,30 @@ def do_prediction():
                   conf=0.1, 
                   device=['CPU'], #use CPU because else CUDA out of memory for all the 83 predicitions
                   project='YOLOv8',
-                  name=f'./building-facade-segmentation-instance-1/runs/YOLOv8_{model_variant}/predict')
+                  name='./building-facade-segmentation-instance-1/runs/YOLOv8_augmented/predict')
     
+
+def do_tune(): 
+    
+    model = YOLO(f'./YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_augmented/train/weights/best.pt')  # load model
+    
+    # Start tuning hyperparameters for YOLOv8n training
+    
+    #result_grid = model.tune(data='./YOLOv8/building-facade-segmentation-instance-1/config.yaml', 
+    #                         space={"lr0": tune.uniform(1e-5, 1e-1)},
+    #                         epochs=50,
+    #                         use_ray=True,)
+    #
+    
+    model.tune(data='config.yaml', epochs=30, iterations=300, optimizer='AdamW', plots=False, save=False, val=False)
+
+
+        
 
     
 
 
 if __name__ == '__main__':
+    clean_mem()
     do_train()
     
