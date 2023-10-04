@@ -10,6 +10,11 @@ yolov8x-seg.pt
 .comet.config
 yolov8n.pt
 */*/*/*/*.pt
+*/*.pt
+YOLOv8/temp_link
 YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_base
 YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_augmented
+YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_nano
+YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_lr
+
 nohup.out
