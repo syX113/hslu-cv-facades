@@ -127,7 +127,7 @@ def log_predictions(predictor, experiment, dataset_name="facade_test_city"):
         predictions_data[file_name] = formatted_data
         experiment.log_image(file_name, name=file_name)
 
-    experiment.log_asset_data(predictions_data, name="predictions-data.json")
+    experiment.log_asset_data(predictions_data)
 
 
 def main():
