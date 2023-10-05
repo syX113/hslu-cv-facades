@@ -18,7 +18,6 @@ print("detectron2:", detectron2.__version__)
 
 # Import additional detectron2 utilities
 from detectron2 import model_zoo
-from detectron2.engine import DefaultPredictor, hooks, launch
 from detectron2.config import get_cfg
 from utils import format_predictions, compute_repeat_factors
 # Custom COCO dataset function for detectron2
@@ -31,24 +30,8 @@ from detectron2.data import DatasetCatalog, MetadataCatalog
 # Directory on server to images & COCO annotations
 ROOT_DIR = '../../data/unzipped/facade-original-coco-segmentation/'
 
-def clear_gpu_cache():
-
-    print("Initial GPU Usage: \n")
-    gpu_usage()
-    print("GPU Usage after emptying the cache: \n")
-    torch.cuda.empty_cache()
-    gpu_usage()
-
-
-def setup(output_directory):
-
-    # Register train & validation in COCO format
-    register_coco_instances("facade_train_city", {}, ROOT_DIR + "train/_annotations.coco.json", ROOT_DIR + "train")
-    register_coco_instances("facade_valid_city", {}, ROOT_DIR + "valid/_annotations.coco.json", ROOT_DIR + "valid")
-    # Test dataset used later for the model evaluation but not used during training run (Hold-out strategy)
-    register_coco_instances("facade_test_city", {}, ROOT_DIR + "test/_annotations.coco.json", ROOT_DIR + "test")
+def class_sampling(dataset_name):
     
-    dataset_name = "facade_train_city"
     repeat_factors = compute_repeat_factors(dataset_name)
     
     # Print class distribution before sampling
@@ -67,6 +50,17 @@ def setup(output_directory):
     effective_distribution = {k: v / sum(effective_counts.values()) for k, v in effective_counts.items()}
     print("Class Distribution (after sampling):", effective_distribution)
     
+    return repeat_factors
+
+
+def setup(output_directory, sampling=False):
+
+    # Register train & validation in COCO format
+    register_coco_instances("facade_train_city", {}, ROOT_DIR + "train/_annotations.coco.json", ROOT_DIR + "train")
+    register_coco_instances("facade_valid_city", {}, ROOT_DIR + "valid/_annotations.coco.json", ROOT_DIR + "valid")
+    # Test dataset used later for the model evaluation but not used during training run (Hold-out strategy)
+    register_coco_instances("facade_test_city", {}, ROOT_DIR + "test/_annotations.coco.json", ROOT_DIR + "test")
+        
     # Define model configuration
     # Reference CFG parameters: https://detectron2.readthedocs.io/en/latest/modules/config.html#yaml-config-references
     cfg = get_cfg()
@@ -85,9 +79,12 @@ def setup(output_directory):
     cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 256
     cfg.MODEL.ROI_HEADS.NUM_CLASSES = 10 + 1  # Number of classes + background
     
-    # Sampling based on the computed class distributions
-    cfg.DATALOADER.SAMPLER_TRAIN = "RepeatFactorTrainingSampler"
-    cfg.DATALOADER.REPEAT_THRESHOLD = statistics.fmean(repeat_factors)
+    if sampling:
+        repeat_factors = class_sampling('facade_train_city')
+        # Sampling based on the computed class distributions
+        cfg.DATALOADER.SAMPLER_TRAIN = "RepeatFactorTrainingSampler"
+        cfg.DATALOADER.REPEAT_THRESHOLD = statistics.fmean(repeat_factors)
+
     
     # Create the output directory if not exists
     os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)

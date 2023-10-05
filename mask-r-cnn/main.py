@@ -4,9 +4,10 @@ with open('mask-r-cnn/comet_api_key.txt', 'r') as file:
     api_key = file.read()
 os.environ['COMET_API_KEY'] = api_key
 os.environ['COMET_PROJECT_NAME'] = 'hslu-computer-vision'
+
 import comet_ml
 from comet_trainer import CometDefaultTrainer
-from train_mask_r_cnn import setup
+from train_mask_r_cnn import setup, log_predictions
 from utils import clear_gpu_cache
 from detectron2.engine import DefaultPredictor, hooks
 
@@ -19,6 +20,7 @@ def main():
     comet_ml.init()
     experiment = comet_ml.Experiment()
     
+    # Create the configuration
     cfg = setup('./mask-r-cnn/output/')
 
     # Wrap the Detectron Default Trainer and initialize trainer instance
@@ -32,8 +34,6 @@ def main():
     # Start the training
     trainer.train()
     
-    print('***** Training Loop finished *****')
-
     # Evaluate Model Predictions
     cfg.MODEL.WEIGHTS = os.path.join(cfg.OUTPUT_DIR, "model_final.pth")
     cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7  # Custom testing threshold
