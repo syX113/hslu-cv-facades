@@ -1,12 +1,20 @@
 # Original source: https://github.com/comet-ml/comet-detectron/blob/main/utils.py
 # Extended and adjusted to meet the requirements, e.g. repeat factor calculation
 
-import os
-import cv2
-import json
+import torch
 import numpy as np
 from detectron2.structures import BoxMode
+from GPUtil import showUtilization as gpu_usage
+
 from detectron2.data import DatasetCatalog, MetadataCatalog
+
+def clear_gpu_cache():
+
+    print("Initial GPU Usage: \n")
+    gpu_usage()
+    print("GPU Usage after emptying the cache: \n")
+    torch.cuda.empty_cache()
+    gpu_usage()
 
 def format_predictions(outputs, annotations):
     """Format Dectectron Predictions so that they can be visualized using
