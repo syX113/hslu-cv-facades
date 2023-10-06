@@ -1,5 +1,5 @@
 # Original source from: https://github.com/comet-ml/comet-detectron/blob/main/comet_trainer.py
-# Adjusted to needed training task
+# Adjusted and refactored to meet the requirements based on the segmentation task
 
 import os
 import time
@@ -12,49 +12,38 @@ from collections import OrderedDict
 from detectron2.engine import DefaultTrainer
 from detectron2.evaluation import COCOEvaluator
 from detectron2.utils.logger import log_every_n_seconds
-from detectron2.data import DatasetMapper, build_detection_test_loader
+from detectron2.data import DatasetMapper, build_detection_test_loader, build_detection_train_loader
 from detectron2.utils import comm
 from detectron2.utils.events import get_event_storage
-from fvcore.common.config import CfgNode
+from utils.training_utils import log_config
+from augmentations.apply_clahe import CustomAugmentationCLAHE
+from augmentations.convert_greyscale import CustomAugmentationGreyscale
 
-
-def log_config(cfg, experiment):
-    """Traverse the Detectron Config graph and log the parameters
-
-    Args:
-        cfg (CfgNode): Detectron Config Node
-        experiment (comet_ml.Experiment): Comet ML Experiment object
-    """
-
-    def log_node(node, prefix):
-        if not isinstance(node, CfgNode):
-            if isinstance(node, dict):
-                experiment.log_parameters(node, prefix=prefix)
-
-            else:
-                experiment.log_parameter(name=prefix, value=node)
-            return
-
-        node_dict = dict(node)
-        for k, v in node_dict.items():
-            _prefix = f"{prefix}-{k}" if prefix else k
-            log_node(v, _prefix)
-
-    log_node(cfg, "")
-
-
-class CometDefaultTrainer(DefaultTrainer):
+class CustomDetectronTrainer(DefaultTrainer):
     def __init__(self, cfg, experiment):
         """
         Args:
             cfg (CfgNode): Detectron Config Node
             experiment (comet_ml.Experiment): Comet Experiment object
         """
+
         super().__init__(cfg)
         self.experiment = experiment
         log_config(cfg, self.experiment)
-
         self._trainer._write_metrics = self._write_metrics
+
+    @classmethod
+    def build_train_loader(cls, cfg):
+        augmentations = []
+
+        for aug_name in cfg.AUGMENTATION.CUSTOM_LIST:
+            if aug_name == "CustomAugmentationCLAHE":
+                augmentations.append(CustomAugmentationCLAHE())
+            if aug_name == "CustomAugmentationGreyscale":
+                augmentations.append(CustomAugmentationGreyscale())
+
+        mapper = DatasetMapper(cfg, is_train=True, augmentations=augmentations)
+        return build_detection_train_loader(cfg, mapper=mapper)
 
     @classmethod
     def build_evaluator(cls, cfg, dataset_name, output_folder=None):
