@@ -16,9 +16,9 @@ roboflow:
   url: https://universe.roboflow.com/building-facade/building-facade-segmentation-instance/dataset/1
   version: 1
   workspace: building-facade
-test: /home/ubuntu/hslu-computer-vision/hslu-cv-facades/YOLOv8/building-facade-segmentation-instance-1/test/images
-train: /home/ubuntu/hslu-computer-vision/hslu-cv-facades/YOLOv8/building-facade-segmentation-instance-1/train/images
-val: /home/ubuntu/hslu-computer-vision/hslu-cv-facades/YOLOv8/building-facade-segmentation-instance-1/valid/images
+test: /home/ubuntu/hslu-computer-vision/hslu-cv-facades/YOLOv8/building-facade-segmentation-instance-1/test_processedCLAHE/images
+train: /home/ubuntu/hslu-computer-vision/hslu-cv-facades/YOLOv8/building-facade-segmentation-instance-1/train_processedCLAHE/images
+val: /home/ubuntu/hslu-computer-vision/hslu-cv-facades/YOLOv8/building-facade-segmentation-instance-1/valid_processedCLAHE/images
 
 
 
