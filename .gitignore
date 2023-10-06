@@ -13,8 +13,14 @@ yolov8n.pt
 */*.pt
 YOLOv8/temp_link
 YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_base
-YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_augmented
-YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_nano
-YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_lr
+YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_grayscale
+YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_CLAHE
+YOLOv8/building-facade-segmentation-instance-1/test_processedCLAHE
+YOLOv8/building-facade-segmentation-instance-1/train_processedCLAHE
+YOLOv8/building-facade-segmentation-instance-1/valid_processedCLAHE
+YOLOv8/building-facade-segmentation-instance-1/test_grayscale
+YOLOv8/building-facade-segmentation-instance-1/train_grayscale
+YOLOv8/building-facade-segmentation-instance-1/valid_grayscale
+
 
 nohup.out
