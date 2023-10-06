@@ -10,7 +10,7 @@ from detectron2.data.datasets import register_coco_instances
 # Add custom nodes to the model config
 from detectron2.config import CfgNode as CN
 
-def get_mask_config(output_directory='./mask-r-cnn/output/', default_augs=False, greyscale=False, clahe=False, sampling=False, dataset_dir = '../../data/unzipped/facade-original-coco-segmentation/'):
+def get_mask_config(output_directory='./mask-r-cnn/_output/', default_augs=False, greyscale=False, clahe=False, sampling=False, dataset_dir = '../../data/unzipped/facade-original-coco-segmentation/'):
 
     # Register train & validation in COCO format
     register_coco_instances("facade_train_city", {}, dataset_dir + "train/_annotations.coco.json", dataset_dir + "train")
