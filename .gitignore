@@ -17,5 +17,12 @@ YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_nano
 YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_lr
 mask-r-cnn/output/model_final.pth
 mask-r-cnn/output/last_checkpoint
-
+YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_grayscale
+YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_CLAHE
+YOLOv8/building-facade-segmentation-instance-1/test_processedCLAHE
+YOLOv8/building-facade-segmentation-instance-1/train_processedCLAHE
+YOLOv8/building-facade-segmentation-instance-1/valid_processedCLAHE
+YOLOv8/building-facade-segmentation-instance-1/test_grayscale
+YOLOv8/building-facade-segmentation-instance-1/train_grayscale
+YOLOv8/building-facade-segmentation-instance-1/valid_grayscale
 nohup.out
