@@ -3,7 +3,7 @@ mask-r-cnn/utils/__pycache__
 mask-r-cnn/augmentations/__pycache__
 .comet.config
 mask-r-cnn/utils/comet_api_key.txt
-output/evaluation/instances_predictions.pth
+mask-r-cnn/_output/evaluation/instances_predictions.pth
 temp_link
 YOLOv8/.comet.config
 YOLOv8/yolov8x-seg.pt
@@ -17,8 +17,8 @@ YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_base
 YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_augmented
 YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_nano
 YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_lr
-mask-r-cnn/output/model_final.pth
-mask-r-cnn/output/last_checkpoint
+mask-r-cnn/_output/model_final.pth
+mask-r-cnn/_output/last_checkpoint
 YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_grayscale
 YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_CLAHE
 YOLOv8/building-facade-segmentation-instance-1/test_processedCLAHE

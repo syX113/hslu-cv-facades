@@ -11,7 +11,8 @@ from utils.training_utils import init_gpu, log_predictions
 def train_mask():
        
     # Create the configuration and Comet experiment
-    cfg = get_mask_config(default_augs=False, greyscale=False, clahe=False, sampling=False)
+    cfg = get_mask_config(default_augs=False, custom_augs=None, sampling=False)
+    # get_mask_config(custom_augs=["CustomAugmentationGreyscale", "CustomAugmentationCLAHE"])
     
     experiment = create_experiment()
 
