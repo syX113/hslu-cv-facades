@@ -1,4 +1,6 @@
 mask-r-cnn/__pycache__
+mask-r-cnn/utils/__pycache__
+mask-r-cnn/augmentations/__pycache__
 .comet.config
 mask-r-cnn/utils/comet_api_key.txt
 output/evaluation/instances_predictions.pth
