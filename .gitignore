@@ -1,7 +1,6 @@
 .comet.config
-mask-r-cnn/comet_api_key.txt
+mask-r-cnn/utils/comet_api_key.txt
 output/evaluation/instances_predictions.pth
-output/model_final.pth
 mask-r-cnn/__pycache__
 temp_link
 YOLOv8/.comet.config
@@ -16,5 +15,7 @@ YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_base
 YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_augmented
 YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_nano
 YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_lr
+mask-r-cnn/output/model_final.pth
+mask-r-cnn/output/last_checkpoint
 
 nohup.out
