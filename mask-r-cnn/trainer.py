@@ -1,5 +1,5 @@
-# Original source from: https://github.com/comet-ml/comet-detectron/blob/main/comet_trainer.py
-# Adjusted and refactored to meet the requirements based on the segmentation task
+# Original Source: https://github.com/comet-ml/comet-detectron/blob/main/comet_trainer.py
+# Adjusted and refactored to meet the requirements
 
 import os
 import time

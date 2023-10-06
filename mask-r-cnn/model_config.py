@@ -1,11 +1,8 @@
-# Import common needed libraries 
 import os
 import statistics
-# Import additional detectron2 and custom utilities
 from detectron2 import model_zoo
 from detectron2.config import get_cfg
 from utils.model_utils import class_sampling
-# Custom COCO dataset function for detectron2
 from detectron2.data.datasets import register_coco_instances
 # Add custom nodes to the model config
 from detectron2.config import CfgNode as CN

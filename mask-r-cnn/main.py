@@ -2,7 +2,6 @@
 
 import os
 import comet_ml
-# Import custom trainer & utils
 from detectron2.engine import DefaultPredictor, hooks
 from trainer import CustomDetectronTrainer
 from model_config import get_mask_config
@@ -11,8 +10,8 @@ from utils.training_utils import init_gpu, log_predictions
 def train_mask():
        
     # Create the configuration and Comet experiment
-    cfg = get_mask_config(default_augs=False, custom_augs=None, sampling=False)
-    # get_mask_config(custom_augs=["CustomAugmentationGreyscale", "CustomAugmentationCLAHE"])
+    #cfg = get_mask_config(default_augs=False, custom_augs=None, sampling=False)
+    cfg = get_mask_config(custom_augs=["CustomAugmentationGreyscale", "CustomAugmentationCLAHE"])
     
     experiment = create_experiment()
 

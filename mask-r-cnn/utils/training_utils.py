@@ -1,11 +1,11 @@
-from GPUtil import showUtilization as gpu_usage
+import random
+import cv2
 import torch
 import detectron2
+from GPUtil import showUtilization as gpu_usage
 from fvcore.common.config import CfgNode
 from detectron2.data import DatasetCatalog
 
-import random
-import cv2
 
 def init_gpu():
 
@@ -20,7 +20,8 @@ def init_gpu():
     torch.cuda.empty_cache()
     gpu_usage()
     
-
+# Original Source: https://github.com/comet-ml/comet-detectron/blob/main/train.py
+# Adjusted and refactored to meet the requirements
 def log_predictions(predictor, experiment, dataset_name="facade_test_city"):
     """Log Model Predictions to Comet for analysis.
 
@@ -48,7 +49,9 @@ def log_predictions(predictor, experiment, dataset_name="facade_test_city"):
 
     experiment.log_asset_data(predictions_data)
     
-    
+
+# Original Source: https://github.com/comet-ml/comet-detectron/blob/main/utils.py
+# Adjusted and refactored to meet the requirements
 def format_predictions(outputs, annotations):
     """Format Dectectron Predictions so that they can be visualized using
     Comet Panels
@@ -92,7 +95,8 @@ def format_predictions(outputs, annotations):
 
     return data
 
-
+# Original Source: https://github.com/comet-ml/comet-detectron/blob/main/comet_trainer.py
+# Adjusted and refactored to meet the requirements
 def log_config(cfg, experiment):
     """Traverse the Detectron Config graph and log the parameters
 
