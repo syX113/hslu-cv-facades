@@ -17,7 +17,7 @@ def objective(trial):
     lr = trial.suggest_float("lr", 0.0001, 0.01, log=True)
     step1 = trial.suggest_int("step1", 500, 5000, step=500)
     step2 = trial.suggest_int("step2", step1+500, 10000, step=500)
-    max_iter = trial.suggest_int("max_iter", 1000, 10000, step=1000)
+    #max_iter = trial.suggest_int("max_iter", 500, 10000, step=1000)
     weight_decay = trial.suggest_float("weight_decay", 1e-5, 1e-3, log=True)
     momentum = trial.suggest_float("momentum", 0.85, 0.99)
     batch_size_per_image = trial.suggest_categorical("batch_size_per_image", [64, 128, 256, 512])
