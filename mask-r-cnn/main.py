@@ -31,7 +31,7 @@ def objective(trial):
     cfg.SOLVER.BASE_LR = lr
     cfg.SOLVER.IMS_PER_BATCH = batch_size
     cfg.SOLVER.STEPS = [step1, step2]
-    cfg.SOLVER.MAX_ITER = 2000 # Using only 2000 epochs for hyperparameter tuning
+    cfg.SOLVER.MAX_ITER = 2100 # Using only 2100 epochs for hyperparameter tuning
     cfg.SOLVER.WEIGHT_DECAY = weight_decay
     cfg.SOLVER.MOMENTUM = momentum
     cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = batch_size_per_image
@@ -56,6 +56,9 @@ def objective(trial):
 
 def hp_tuning_train_mask():
     
+    # Clear GPU cache and get CUDA/Torch versions
+    init_gpu()
+    
     study = optuna.create_study(direction="maximize") # Using "maximize", since AP metric should be maximized  
     study.optimize(objective, n_trials=25)
 
@@ -68,6 +71,9 @@ def hp_tuning_train_mask():
         print(f"    {key}: {value}")
 
 def train_mask():
+    
+    # Clear GPU cache and get CUDA/Torch versions
+    init_gpu()
        
     # Create the configuration and Comet experiment
     # cfg = get_mask_config(default_augs=False, custom_augs=None, sampling=False)
@@ -119,8 +125,6 @@ def evaluate_model(cfg, experiment):
 
 if __name__ == "__main__":
     
-    # Clear GPU cache and get CUDA/Torch versions
-    init_gpu()
     # Start the training loop
     #train_mask()
     # Start the hyperparameter search training loop
