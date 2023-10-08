@@ -18,7 +18,7 @@ def get_mask_config(output_directory='./mask-r-cnn/_output/', default_augs=False
     # Define model configuration
     # Reference CFG parameters: https://detectron2.readthedocs.io/en/latest/modules/config.html#yaml-config-references
     cfg = get_cfg()
-    cfg.MODEL.DEVICE = "cuda:3" # Set GPU or CPU devices, e.g. "cuda:3" to use specific GPU
+    cfg.MODEL.DEVICE = "cuda:2" # Set GPU or CPU devices, e.g. "cuda:3" to use specific GPU
     cfg.OUTPUT_DIR = output_directory
     cfg.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/mask_rcnn_X_101_32x8d_FPN_3x.yaml"))
     cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-InstanceSegmentation/mask_rcnn_X_101_32x8d_FPN_3x.yaml")

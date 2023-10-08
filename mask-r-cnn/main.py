@@ -121,7 +121,7 @@ def evaluate_model(cfg, experiment):
     val_loader = build_detection_test_loader(cfg, "facade_valid_city")
     results = inference_on_dataset(predictor.model, val_loader, evaluator)
     
-    return results["segm/AP"]
+    return results['segm']['AP']
 
 if __name__ == "__main__":
     

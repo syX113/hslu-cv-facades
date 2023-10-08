@@ -3,7 +3,7 @@ mask-r-cnn/utils/__pycache__
 mask-r-cnn/augmentations/__pycache__
 .comet.config
 mask-r-cnn/utils/comet_api_key.txt
-mask-r-cnn/_output/evaluation/instances_predictions.pth
+mask-r-cnn/_output/eval/instances_predictions.pth
 temp_link
 YOLOv8/.comet.config
 YOLOv8/yolov8x-seg.pt
