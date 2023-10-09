@@ -11,7 +11,7 @@ from detectron2.evaluation import COCOEvaluator, inference_on_dataset
 import optuna
 
 # Define the Objective function for Optuna
-def objective(trial):
+def objective(cfg, trial):
     
     # Define the hyperparameter search space
     lr = trial.suggest_float("lr", 0.0001, 0.01, log=True)
@@ -24,8 +24,6 @@ def objective(trial):
     warmup_factor = trial.suggest_float("warmup_factor", 0.01, 1)
     warmup_iters = trial.suggest_int("warmup_iters", 100, 1000, step=100)
     batch_size = trial.suggest_categorical("batch_size", [2, 4, 8])
-
-    cfg = get_mask_config()
     
     # Overwriting default model config
     cfg.SOLVER.BASE_LR = lr
@@ -55,13 +53,17 @@ def objective(trial):
     return segm_ap
 
 
-def hp_tuning_train_mask():
+def hp_tuning_train_mask(cfg):
     
     # Clear GPU cache and get CUDA/Torch versions
     init_gpu()
     
+    # Wrapper for the objective, so CFG is correctly passed
+    def wrapped_objective(trial):
+        return objective(cfg, trial)
+    
     study = optuna.create_study(direction="maximize") # Using "maximize", since AP metric should be maximized  
-    study.optimize(objective, n_trials=25)
+    study.optimize(wrapped_objective, n_trials=25)
 
     print("Best trial:")
     trial = study.best_trial
@@ -71,15 +73,11 @@ def hp_tuning_train_mask():
     for key, value in trial.params.items():
         print(f"    {key}: {value}")
 
-def train_mask():
+def train_mask(cfg):
     
     # Clear GPU cache and get CUDA/Torch versions
     init_gpu()
-       
-    # Create the configuration and Comet experiment
-    # cfg = get_mask_config(default_augs=False, custom_augs=None, sampling=False)
-    cfg = get_mask_config(custom_augs=["CustomAugmentationGreyscale", "CustomAugmentationCLAHE"])
-    
+    # Create Comet Experiment to log all metrics
     experiment = create_experiment()
 
     # Wrap the Detectron Default Trainer and initialize trainer instance with defined hooks
@@ -126,9 +124,20 @@ def evaluate_model(cfg, experiment):
 
 if __name__ == "__main__":
     
+    # Register the datasets for all runs
     register_datasets()
     
-    # Start the training loop
-    #train_mask()
-    # Start the hyperparameter search training loop
-    hp_tuning_train_mask()
+    # Train base model, without any augmentations
+    train_mask(cfg = get_mask_config(default_augs=False, custom_augs=None, sampling=False))
+    
+    # Train model, only with CLAHE modifed images
+    train_mask(cfg = get_mask_config(default_augs=False, custom_augs=["CustomAugmentationCLAHE"], sampling=False))
+    
+    # Train model, only with greyscale images
+    train_mask(cfg = get_mask_config(default_augs=False, custom_augs=["CustomAugmentationGreyscale"], sampling=False))
+    
+    # Train model with Detectron's built-in augmentations (Flip/Crop)
+    train_mask(cfg = get_mask_config(default_augs=True, custom_augs=False, sampling=False))
+    
+    # Start a hyperparameter tuning with 25 trials to find best parameters with built-in augmentations
+    hp_tuning_train_mask(cfg = get_mask_config(default_augs=True, custom_augs=None, sampling=False))
