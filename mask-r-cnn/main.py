@@ -4,7 +4,7 @@ import os
 import comet_ml
 from detectron2.engine import DefaultPredictor, hooks
 from trainer import CustomDetectronTrainer
-from model_config import get_mask_config
+from model_config import get_mask_config, register_datasets
 from utils.training_utils import init_gpu, log_predictions
 from detectron2.data import build_detection_test_loader
 from detectron2.evaluation import COCOEvaluator, inference_on_dataset
@@ -31,7 +31,8 @@ def objective(trial):
     cfg.SOLVER.BASE_LR = lr
     cfg.SOLVER.IMS_PER_BATCH = batch_size
     cfg.SOLVER.STEPS = [step1, step2]
-    cfg.SOLVER.MAX_ITER = 2100 # Using only 2100 epochs for hyperparameter tuning
+    cfg.SOLVER.MAX_ITER = 1500 # Reducing to 1500, so the training is faster
+    cfg.SOLVER.STEPS = (500,1000) # Reduces LR at step 500 and 1000
     cfg.SOLVER.WEIGHT_DECAY = weight_decay
     cfg.SOLVER.MOMENTUM = momentum
     cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = batch_size_per_image
@@ -124,6 +125,8 @@ def evaluate_model(cfg, experiment):
     return results['segm']['AP']
 
 if __name__ == "__main__":
+    
+    register_datasets()
     
     # Start the training loop
     #train_mask()

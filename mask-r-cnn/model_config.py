@@ -7,14 +7,15 @@ from detectron2.data.datasets import register_coco_instances
 # Add custom nodes to the model config
 from detectron2.config import CfgNode as CN
 
-def get_mask_config(output_directory='./mask-r-cnn/_output/', default_augs=False, custom_augs=None, sampling=False, dataset_dir = '../../data/unzipped/facade-original-coco-segmentation/'):
-
+def register_datasets( dataset_dir = '../../data/unzipped/facade-original-coco-segmentation/'):
     # Register train & validation in COCO format
     register_coco_instances("facade_train_city", {}, dataset_dir + "train/_annotations.coco.json", dataset_dir + "train")
     register_coco_instances("facade_valid_city", {}, dataset_dir + "valid/_annotations.coco.json", dataset_dir + "valid")
     # Test dataset used later for the model evaluation but not used during training run (Hold-out strategy)
     register_coco_instances("facade_test_city", {}, dataset_dir + "test/_annotations.coco.json", dataset_dir + "test")
-    
+
+def get_mask_config(output_directory='./mask-r-cnn/_output/', default_augs=False, custom_augs=None, sampling=False):
+
     # Define model configuration
     # Reference CFG parameters: https://detectron2.readthedocs.io/en/latest/modules/config.html#yaml-config-references
     cfg = get_cfg()
