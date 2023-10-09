@@ -56,8 +56,8 @@ def get_mask_config(output_directory='./mask-r-cnn/_output/', default_augs=False
     cfg.AUGMENTATION = CN()
     if custom_augs is None:
         custom_augs = []
-    else:    
-        cfg.AUGMENTATION.CUSTOM_LIST = custom_augs
+
+    cfg.AUGMENTATION.CUSTOM_LIST = custom_augs
     
     # Create the output directory if not exists
     os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
