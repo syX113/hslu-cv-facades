@@ -44,7 +44,7 @@ def get_mask_config(output_directory='./mask-r-cnn/_output/', default_augs=False
         cfg.INPUT.RANDOM_FLIP = 'horizontal'
         cfg.INPUT.CROP.ENABLED = True
         cfg.INPUT.CROP.TYPE = "relative_range"
-        cfg.CROP.SIZE = [0.7, 0.7]
+        cfg.INPUT.CROP.SIZE = [0.7, 0.7]
         
     if sampling:
         repeat_factors = class_sampling('facade_train_city')
