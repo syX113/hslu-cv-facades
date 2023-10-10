@@ -23,7 +23,7 @@ def objective(cfg, trial):
     anchor_sizes = trial.suggest_categorical("anchor_sizes", [[32, 64, 128], [64, 128, 256], [128, 256, 512]])
     warmup_factor = trial.suggest_float("warmup_factor", 0.01, 1)
     warmup_iters = trial.suggest_int("warmup_iters", 100, 1000, step=100)
-    batch_size = trial.suggest_categorical("batch_size", [2, 4, 8])
+    batch_size = trial.suggest_categorical("batch_size", [1, 2, 4])
     
     # Overwriting default model config
     cfg.SOLVER.BASE_LR = lr
@@ -137,7 +137,7 @@ if __name__ == "__main__":
     train_mask(cfg = get_mask_config(default_augs=False, custom_augs=["CustomAugmentationGreyscale"], sampling=False))
     
     # Train model with Detectron's built-in augmentations (Flip/Crop)
-    train_mask(cfg = get_mask_config(default_augs=True, custom_augs=False, sampling=False))
+    train_mask(cfg = get_mask_config(default_augs=True, custom_augs=None, sampling=False))
     
     # Start a hyperparameter tuning with 25 trials to find best parameters with built-in augmentations
     hp_tuning_train_mask(cfg = get_mask_config(default_augs=True, custom_augs=None, sampling=False))
