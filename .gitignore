@@ -7,20 +7,38 @@ mask-r-cnn/temp_link
 YOLOv8/.comet.config
 YOLOv8/yolov8x-seg.pt
 yolov8x-seg.pt
+yolov8n-seg.pt
 .comet.config
 yolov8n.pt
 */*/*/*/*.pt
 */*.pt
+YOLOv8/building-facade-segmentation-instance-1/dataset_complete
+runs
+linux cmd.txt
+
 YOLOv8/temp_link
 YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_base
+YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_augmented
+
+
 YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_grayscale
-YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_CLAHE
-YOLOv8/building-facade-segmentation-instance-1/test_processedCLAHE
-YOLOv8/building-facade-segmentation-instance-1/train_processedCLAHE
-YOLOv8/building-facade-segmentation-instance-1/valid_processedCLAHE
 YOLOv8/building-facade-segmentation-instance-1/test_grayscale
 YOLOv8/building-facade-segmentation-instance-1/train_grayscale
 YOLOv8/building-facade-segmentation-instance-1/valid_grayscale
 
+YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_CLAHEbw2
+YOLOv8/building-facade-segmentation-instance-1/test_processedCLAHEbw2
+YOLOv8/building-facade-segmentation-instance-1/train_processedCLAHEbw2
+YOLOv8/building-facade-segmentation-instance-1/valid_processedCLAHEbw2
+
+YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_CLAHEbw40
+YOLOv8/building-facade-segmentation-instance-1/test_processedCLAHEbw40
+YOLOv8/building-facade-segmentation-instance-1/train_processedCLAHEbw40
+YOLOv8/building-facade-segmentation-instance-1/valid_processedCLAHEbw40
+
+YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_CLAHEcol40
+YOLOv8/building-facade-segmentation-instance-1/test_processedCLAHEcol40
+YOLOv8/building-facade-segmentation-instance-1/train_processedCLAHEcol40
+YOLOv8/building-facade-segmentation-instance-1/valid_processedCLAHEcol40
 
 nohup.out

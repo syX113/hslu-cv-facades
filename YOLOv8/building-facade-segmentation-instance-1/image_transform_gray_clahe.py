@@ -4,18 +4,29 @@ import os
 ls = ['test','train','valid']
 
 for x in ls:  
-    # Define the folder containing the original images
+    # folder containing the original images
     input_folder = f'./YOLOv8/building-facade-segmentation-instance-1/{x}/images/'
 
-    # Define the folder where you want to save the grayscale images
+    # folder to save the grayscale images
     grayscale_folder = f'./YOLOv8/building-facade-segmentation-instance-1/{x}_grayscale/images'
 
-    # Define the folder where you want to save the processed images
-    processed_folder = f'./YOLOv8/building-facade-segmentation-instance-1/{x}_processedCLAHE/images'
+    # folder to save the processed images CLAHE (b/w) easy (cliplimit 2.0)
+    processedCLAHEbw2_folder = f'./YOLOv8/building-facade-segmentation-instance-1/{x}_processedCLAHEbw2/images'
+    
+     # folder to save the processed images CLAHE (b/w) extrem (cliplimit 40.0)
+    processedCLAHEbw40_folder = f'./YOLOv8/building-facade-segmentation-instance-1/{x}_processedCLAHEbw40/images'
+    
+    # folder to save the processed images CLAHE (color) extrem (cliplimit 40.0)
+    processedCLAHEcol40_folder = f'./YOLOv8/building-facade-segmentation-instance-1/{x}_processedCLAHEcol40/images'
+    
+    
 
     # Create the output folders if they don't exist
     os.makedirs(grayscale_folder, exist_ok=True)
-    os.makedirs(processed_folder, exist_ok=True)
+    os.makedirs(processedCLAHEbw2_folder, exist_ok=True)
+    os.makedirs(processedCLAHEbw40_folder, exist_ok=True)
+    os.makedirs(processedCLAHEcol40_folder, exist_ok=True)
+
 
     # Get a list of files in the input folder
     file_list = os.listdir(input_folder)
@@ -27,6 +38,9 @@ for x in ls:
             # Construct the full path to the input image
             input_image_path = os.path.join(input_folder, file_name)
             
+            # Read the input image in col
+            img_col = cv.imread(input_image_path,cv.IMREAD_COLOR)
+            
             # Read the input image in grayscale
             img = cv.imread(input_image_path, cv.IMREAD_GRAYSCALE)
             
@@ -37,16 +51,42 @@ for x in ls:
             grayscale_output_path = os.path.join(grayscale_folder, file_name)
             
             # Write the grayscale image to the grayscale folder
-            cv.imwrite(grayscale_output_path, img)
+            #cv.imwrite(grayscale_output_path, img)
             
-            # Create a CLAHE object (Arguments are optional).
+            # Create a CLAHE (b/w) easy (cliplimit 2.0) object 
             clahe = cv.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
             cl1 = clahe.apply(img)
             
             # Construct the full path to the processed output image
-            processed_output_path = os.path.join(processed_folder, file_name)
+            processedCLAHEbw2_folder_output_path = os.path.join(processedCLAHEbw2_folder, file_name)
             
             # Write the processed image to the processed folder
-            cv.imwrite(processed_output_path, cl1)
+            #cv.imwrite(processedCLAHEbw2_folder_output_path, cl1)
             
-            print(f"Processed image {i + 1}: {input_image_path} -> {grayscale_output_path} (Grayscale), {processed_output_path} (Processed)")
+            print(f"Processed image {i + 1}: {input_image_path} -> {grayscale_output_path} (Grayscale), {processedCLAHEbw2_folder_output_path} (Processed)")
+
+            # Create a CLAHE (b/w) extrem (cliplimit 40.0)
+            clahe = cv.createCLAHE(clipLimit=40.0, tileGridSize=(8, 8))
+            cl1 = clahe.apply(img)
+            
+            # Construct the full path to the processed output image
+            processedCLAHEbw40_folder_output_path = os.path.join(processedCLAHEbw40_folder, file_name)
+            
+            # Write the processed image to the processed folder
+            cv.imwrite(processedCLAHEbw40_folder_output_path, cl1)
+            
+            print(f"Processed image {i + 1}: {input_image_path} -> {grayscale_output_path} (Grayscale), {processedCLAHEbw40_folder_output_path} (Processed)")
+
+
+            # Create a CLAHE (col) extrem (cliplimit 40.0): wh have to split the channels: 
+            channels = cv.split(img_col)
+            enhanced_channels = [clahe.apply(channel) for channel in channels]
+            enhanced_image = cv.merge(enhanced_channels)
+                        
+            # Construct the full path to the processed output image
+            processedCLAHEcol40_folder_output_path = os.path.join(processedCLAHEcol40_folder, file_name)
+            
+            # Write the processed image to the processed folder
+            cv.imwrite(processedCLAHEcol40_folder_output_path, enhanced_image)
+            
+            print(f"Processed image {i + 1}: {input_image_path} -> {grayscale_output_path} (Grayscale), {processedCLAHEcol40_folder_output_path} (Processed)")
