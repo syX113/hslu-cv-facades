@@ -128,16 +128,16 @@ if __name__ == "__main__":
     register_datasets()
     
     # Train base model, without any augmentations
-    #train_mask(cfg = get_mask_config(default_augs=False, custom_augs=None, sampling=False))
+    train_mask(cfg = get_mask_config(default_augs=False, custom_augs=None, sampling=False))
     
     # Train model, only with CLAHE modifed images
-    #train_mask(cfg = get_mask_config(default_augs=False, custom_augs=["CustomAugmentationCLAHE"], sampling=False))
+    train_mask(cfg = get_mask_config(default_augs=False, custom_augs=["CustomAugmentationCLAHE"], sampling=False))
     
     # Train model, only with greyscale images
-    #train_mask(cfg = get_mask_config(default_augs=False, custom_augs=["CustomAugmentationGreyscale"], sampling=False))
+    train_mask(cfg = get_mask_config(default_augs=False, custom_augs=["CustomAugmentationGreyscale"], sampling=False))
     
     # Train model with Detectron's built-in augmentations (Flip/Crop)
-    #train_mask(cfg = get_mask_config(default_augs=True, custom_augs=None, sampling=False))
+    train_mask(cfg = get_mask_config(default_augs=True, custom_augs=None, sampling=False))
     
     # Start a hyperparameter tuning with 25 trials to find best parameters with built-in augmentations
     hp_tuning_train_mask(cfg = get_mask_config(default_augs=True, custom_augs=None, sampling=False))
