@@ -29,8 +29,8 @@ def objective(cfg, trial):
     cfg.SOLVER.BASE_LR = lr
     cfg.SOLVER.IMS_PER_BATCH = batch_size
     cfg.SOLVER.STEPS = [step1, step2]
-    cfg.SOLVER.MAX_ITER = 1500 # Reducing to 1500, so the training is faster
-    cfg.SOLVER.STEPS = (500,1000) # Reduces LR at step 500 and 1000
+    #cfg.SOLVER.MAX_ITER = 1500 # Reducing to 1500, so the training is faster
+    cfg.SOLVER.STEPS = (1000,2000) # Reduces LR at step 500 and 1000
     cfg.SOLVER.WEIGHT_DECAY = weight_decay
     cfg.SOLVER.MOMENTUM = momentum
     cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = batch_size_per_image
@@ -128,16 +128,16 @@ if __name__ == "__main__":
     register_datasets()
     
     # Train base model, without any augmentations
-    train_mask(cfg = get_mask_config(default_augs=False, custom_augs=None, sampling=False))
+    #train_mask(cfg = get_mask_config(default_augs=False, custom_augs=None, sampling=False))
     
     # Train model, only with CLAHE modifed images
-    train_mask(cfg = get_mask_config(default_augs=False, custom_augs=["CustomAugmentationCLAHE"], sampling=False))
+    #train_mask(cfg = get_mask_config(default_augs=False, custom_augs=["CustomAugmentationCLAHE"], sampling=False))
     
     # Train model, only with greyscale images
-    train_mask(cfg = get_mask_config(default_augs=False, custom_augs=["CustomAugmentationGreyscale"], sampling=False))
+    #train_mask(cfg = get_mask_config(default_augs=False, custom_augs=["CustomAugmentationGreyscale"], sampling=False))
     
     # Train model with Detectron's built-in augmentations (Flip/Crop)
-    train_mask(cfg = get_mask_config(default_augs=True, custom_augs=None, sampling=False))
+    #train_mask(cfg = get_mask_config(default_augs=True, custom_augs=None, sampling=False))
     
     # Start a hyperparameter tuning with 25 trials to find best parameters with built-in augmentations
     hp_tuning_train_mask(cfg = get_mask_config(default_augs=True, custom_augs=None, sampling=False))
