@@ -112,24 +112,7 @@ All of these steps were executed for both YOLO and Mask-R-CNN frameworks. A trai
 
 ## Results
 
-Results were visualized in CometML and can be found under: https://www.comet.com/syx/hslu-computer-vision/reports/hslu-computer-vision-facade-segmentation \
-
-The comparison between YOLOv8 models (Base, CLAHE (Contrast Limited Adaptive Histogram Equalization), and Grayscale versions) revealed the following findings:
-- mAP50: The mAP50 scores were relatively equal among the models, with the base model slightly outperforming the others.
-- Loss: The loss values for all three models were equal.
-- Seg_loss: Segmentation loss was also equal across all models, but each exhibited strong overfitting tendencies. To address this issue, it was determined that augmentation methods should be applied.
-![image](https://github.com/syX113/hslu-cv-facades/assets/118247293/0ab18a68-ef9f-4745-b2e9-352b731395ab)
-
-The comparison between the YOLOv8 Base model and the Augmented model yielded the following insights:
-- mAP50: The augmented model outperformed the base model, achieving a higher mAP50 score.
-- Loss: The base model exhibited a faster decay in its loss function during training.
-- Seg_loss: The base model showed signs of strong overfitting, while the augmented model displayed a faster decay in segmentation loss.
-![image](https://github.com/syX113/hslu-cv-facades/assets/118247293/8d66b453-0028-448e-a154-5460f6620fcd)
-
-As a result, it was observed that the augmented model required more training time but offered superior performance in the segmentation task and demonstrated reduced overfitting to the dataset. \
-
-
-
+Results were visualized in CometML and can be found under: https://www.comet.com/syx/hslu-computer-vision/reports/hslu-computer-vision-facade-segmentation
 Overall, the YOLOv8 Augmented Model performed better than the Mask R-CNN Model in the observed metrics. 
 
 ## Authors
