@@ -25,6 +25,13 @@ In initial, heuristic tests, two deep learning methods showed promising results 
 2. YOLOv8 ([from Ultralytics](https://docs.ultralytics.com))
 
 The primary objective of this research project is to identify the most effective deep learning method.\
+We want to segment the building into: 
+Façade
+Window 
+Balcony
+...
+![image](https://github.com/syX113/hslu-cv-facades/assets/118247293/e9704ad7-d89c-4a07-9599-c37dc7eb4eeb)
+
 This will involve optimizing both approaches through additional image preparation steps and then comparing and validating these methods using appropriate metrics and techniques.
 
 ## Research Questions 
