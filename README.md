@@ -53,6 +53,16 @@ Classes:
 
 Additional datasets are not considered and used for testing/validation.
 
+## Detectron2 in-depth
+
+Part 1 to 5:
+- https://medium.com/@hirotoschwert/digging-into-detectron-2-47b2e794fabd
+- https://medium.com/@hirotoschwert/digging-into-detectron-2-part-2-dd6e8b0526e
+- https://medium.com/@hirotoschwert/digging-into-detectron-2-part-3-1ecc27efc0b2
+- https://medium.com/@hirotoschwert/digging-into-detectron-2-part-4-3d1436f91266
+- https://medium.com/@hirotoschwert/digging-into-detectron-2-part-5-6e220d762f9
+
+
 ## Methodology
 
 todo
