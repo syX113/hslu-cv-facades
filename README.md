@@ -74,7 +74,7 @@ Classes:
 
 Additional datasets are not considered and used for testing/validation.
 
-## Detectron2 in-depth
+## Detectron2 
 
 Part 1 to 5:
 - https://medium.com/@hirotoschwert/digging-into-detectron-2-47b2e794fabd
@@ -82,6 +82,13 @@ Part 1 to 5:
 - https://medium.com/@hirotoschwert/digging-into-detectron-2-part-3-1ecc27efc0b2
 - https://medium.com/@hirotoschwert/digging-into-detectron-2-part-4-3d1436f91266
 - https://medium.com/@hirotoschwert/digging-into-detectron-2-part-5-6e220d762f9
+
+## YOLOv8 
+
+- Model: https://docs.ultralytics.com/models/yolov8/
+- Segmentation: https://docs.ultralytics.com/tasks/segment/
+- Train: https://docs.ultralytics.com/modes/train/
+
 
 
 ## Methodology & Proceeding 
