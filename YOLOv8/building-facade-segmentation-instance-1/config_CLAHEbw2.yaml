@@ -1,14 +1,14 @@
 names:
-  0: balcony-fence
-  1: car
-  2: facade
-  3: fence
-  4: non-building-infrastructure
-  5: shop
-  6: street
-  7: traffic-infrastructure
-  8: vegetation
-  9: window
+- balcony-fence
+- car
+- facade
+- fence
+- non-building-infrastructure
+- shop
+- street
+- traffic-infrastructure
+- vegetation
+- window
 nc: 10
 roboflow:
   license: CC BY 4.0
@@ -16,9 +16,9 @@ roboflow:
   url: https://universe.roboflow.com/building-facade/building-facade-segmentation-instance/dataset/1
   version: 1
   workspace: building-facade
-test: /home/ubuntu/hslu-computer-vision/hslu-cv-facades/YOLOv8/building-facade-segmentation-instance-1/test/images
-train: /home/ubuntu/hslu-computer-vision/hslu-cv-facades/YOLOv8/building-facade-segmentation-instance-1/train/images
-val: /home/ubuntu/hslu-computer-vision/hslu-cv-facades/YOLOv8/building-facade-segmentation-instance-1/valid/images
+test: /home/ubuntu/hslu-computer-vision/hslu-cv-facades/YOLOv8/building-facade-segmentation-instance-1/test_processedCLAHEbw2/images
+train: /home/ubuntu/hslu-computer-vision/hslu-cv-facades/YOLOv8/building-facade-segmentation-instance-1/train_processedCLAHEbw2/images
+val: /home/ubuntu/hslu-computer-vision/hslu-cv-facades/YOLOv8/building-facade-segmentation-instance-1/valid_processedCLAHEbw2/images
 
 
 
