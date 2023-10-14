@@ -74,6 +74,9 @@ Classes:
 
 Additional datasets are not considered and used for testing/validation.
 
+![image](https://github.com/syX113/hslu-cv-facades/assets/118247293/4a82d88e-3c10-46fc-a871-b92e0d719f8a)
+
+
 ## Detectron2 
 
 Part 1 to 5:
