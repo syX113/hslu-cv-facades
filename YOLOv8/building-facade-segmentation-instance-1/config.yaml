@@ -19,25 +19,3 @@ roboflow:
 test: /home/ubuntu/hslu-computer-vision/hslu-cv-facades/YOLOv8/building-facade-segmentation-instance-1/test/images
 train: /home/ubuntu/hslu-computer-vision/hslu-cv-facades/YOLOv8/building-facade-segmentation-instance-1/train/images
 val: /home/ubuntu/hslu-computer-vision/hslu-cv-facades/YOLOv8/building-facade-segmentation-instance-1/valid/images
-
-
-
-
-# Data Augmentation ------------------------------------------------------------------------------------------------------
-#augmentations:
-#- Albumentations:
-#    blur_limit: 7
-#    brightness_contrast: 
-#      brightness_limit: 0.1
-#      contrast_limit: 0.1
-#    crop:
-#      height: 1024
-#      width: 1024
-#    gauss_noise:
-#      var_limit: (10.0, 50.0)
-#    horizontal_flip: true
-#    hue_saturation:
-#      hue_shift_limit: 20
-#      sat_shift_limit: 50
-#    motion_blur:
-#      blur_limit: 7
