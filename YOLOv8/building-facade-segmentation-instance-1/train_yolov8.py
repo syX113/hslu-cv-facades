@@ -30,9 +30,9 @@ def do_train_base():
     model.train(data='./YOLOv8/building-facade-segmentation-instance-1/config.yaml'
                 ,epochs=3000 
                 ,imgsz=1024 
-                ,batch=8 
+                ,batch=8
                 ,plots=True 
-                ,device=[0,1] #change cores beeing used  
+                ,device=[0,1,2,3] #change cores beeing used  
                 ,save_period=250
                 ,workers=4
                 ,val=True
@@ -273,9 +273,9 @@ def do_train_augmented():
     model.train(data='./YOLOv8/building-facade-segmentation-instance-1/config.yaml', 
                 epochs=1000, 
                 imgsz=1024, 
-                batch=4, # AutoBatch?
+                batch=4,
                 plots=True, 
-                device=[1,2], #change cores beeing used  
+                device=[1,2],
                 save_period=100, 
                 workers=4,
                 val=True,
@@ -417,10 +417,11 @@ def do_k_fold():
 
 
 def do_validation():
-    model = YOLO('./YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_augmented/train/weights/best.pt')  # load model
-    results = model.val(split='val',
+    model = YOLO('/home/ubuntu/code/hslu-cv-facades/YOLOv8/building-facade-segmentation-instance-1/runs/YOLOv8_base/train7/weights/best.pt')  # load model
+    results = model.val(split='test',
                         project='YOLOv8',
-                        name=f'./building-facade-segmentation-instance-1/runs/YOLOv8_augmented/val') # evaluate model performance on the validation set
+                        name=f'./building-facade-segmentation-instance-1/runs/YOLOv8_augmented/val',
+                        plots=True) # evaluate model performance on the validation set
                           
     results.box.map    # map50-95
     results.box.map50  # map50
@@ -448,7 +449,7 @@ def do_prediction():
 #choose what do you want to do 
 if __name__ == '__main__':
     clean_mem()
-    do_train_base()
+    do_validation()
     #do_train_grayscale()
     #do_train_CLAHEbw2()
     #do_train_CLAHEbw40()
